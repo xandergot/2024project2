@@ -6,25 +6,13 @@ class Memory{
         unsigned char* MainMemory; 
 
     public:
-        Memory(int size){
-            this.memorySize = size;
-            MainMemory = [size];
-            for(int i = 0;i<size,i++){
-                MainMemory[i] = i%255;
-            }
-        }
+        Memory(int size);
 
-        unsigned char getByte(unsigned long address){
-            return(this.MainMemory[address = size]);
-        }
+        unsigned char getByte(unsigned long address);
 
-        void setBytes(unsigned long address){
-            this.MainMemory[address] = 1;
-        }
+        void setBytes(unsigned long address);
 
-        int getMemorySize(){
-            return(this.memorySize);
-        };
+        int getMemorySize();
 
         void displayBits();
 };
