@@ -1,28 +1,31 @@
 #ifndef Memory_hpp
 #define Memory_hpp
 class Memory{
-    int memorySize;
-    unsigned char* MainMemory; 
+    private:
+        int memorySize;
+        unsigned char* MainMemory; 
 
-    Memory(int size){
-        this.memorySize = size;
-        MainMemory = [size];
-        for(int i = 0;i<size,i++){
-            MainMemory[i] = i%255;
+    public:
+        Memory(int size){
+            this.memorySize = size;
+            MainMemory = [size];
+            for(int i = 0;i<size,i++){
+                MainMemory[i] = i%255;
+            }
         }
-    }
 
-    unsigned char getByte(unsigned long address){
-        return(this.MainMemory[address = size]);
-    }
+        unsigned char getByte(unsigned long address){
+            return(this.MainMemory[address = size]);
+        }
 
-    void setBytes(unsigned long address){
-        this.MainMemory[address] = 1;
-    }
+        void setBytes(unsigned long address){
+            this.MainMemory[address] = 1;
+        }
 
-    void displayBits();
+        int getMemorySize(){
+            return(this.memorySize);
+        };
+
+        void displayBits();
 };
-
-
-
-#endifint
+#endif
