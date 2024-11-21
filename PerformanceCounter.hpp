@@ -25,6 +25,5 @@ public:
     double getMissRate() const;
     double getWritebackRate() const;
 };
-};
 
 #endif
