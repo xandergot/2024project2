@@ -8,22 +8,16 @@ private:
     int data;  // is this an int?
 
 public:
-    // Constructor
-    Block() : tag(0), valid(false), data(0) {}
+    Block();
+   
+    unsigned long getTag();
+    bool isValid();
 
-    // Getters
-    unsigned long getTag() const { return tag; }
-    bool isValid() const { return valid; }
-    int getData() const { return data; }
+    void setTag(unsigned long t);
+    void setValid(bool v);
 
-    // Setters
-    void setTag(unsigned long t) { tag = t; }
-    void setValid(bool v) { valid = v; }
-    void setData(int d) { data = d; }
-
-    // Core functions
-    int readData() const { return data; }
-    void writeData(int d) { data = d; }
+    int readData();
+    void writeData(int d);
 };
 
 

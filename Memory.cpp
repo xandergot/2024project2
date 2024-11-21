@@ -1,27 +1,27 @@
-#include "Memmory.hpp"
+#include "Memory.hpp"
 
 
-Memmory::Memory(int size){
-        this.memorySize = size;
+Memory::Memory(int size){
+        this->memorySize = size;
         MainMemory = [size];
         for(int i = 0;i<size,i++){
             MainMemory[i] = i%255;
         }
 }
 
-void Memmory::setBytes(unsigned long address){
-    this.MainMemory[address] = 1;
+void Memory::setBytes(unsigned long address){
+    this->MainMemory[address] = 1;
 }
 
-unsigned char Memmory::getByte(unsigned long address){
-    return(this.MainMemory[address = size]);
+unsigned char Memory::getByte(unsigned long address){
+    return(this->MainMemory[address = size]);
 }
 
 
-int Memmory::getMemorySize(){
+int Memory::getMemorySize(){
     return(this.memorySize);
 }
 
-void Memmory::displayBits(){
+void Memory::displayBits(){
     
 }

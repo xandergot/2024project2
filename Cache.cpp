@@ -1,13 +1,39 @@
 #include "Cache.hpp"
+#include "AddressDecoder.hpp"
+
+Cache::Cache(int size, int associativity, int blockSize){
+    this->size = size;
+    this->associativity = associativity;
+    this->blockSize = blockSize;
+    int setNum = size/(associativity * blockSize);
+    sets = new Set*[setNum];
+
+    for (int i = 0; i < setNum; i++) {
+        sets[i] = new Set(associativity, blockSize);
+    }
+}
 
 int Cache::getSize(){
-    return(this.size);
+    return(this->size);
 }
 
 int Cache::getAssociativity(){
-    return(this.associativity);
+    return(this->associativity);
 }
 
-int Chache::getBlockSize(){
-    return(this.blockSize);
+int Cache::getBlockSize(){
+    return(this->blockSize);
+}
+
+unsigned char Cache::read(unsigned long address){
+    unsigned long tag, setIndex, blockOffset;
+
+}
+void Cache::write(){
+    
+}
+void Cache::display(){
+        for (int i = 0; i < size/(associativity * blockSize); i++) {
+        std::cout << "Set " << i << ": ";
+        sets[i]->display();
 }

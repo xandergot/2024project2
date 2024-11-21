@@ -1,13 +1,14 @@
 #ifndef Cache_hpp // checks if Cache_hpp is defined.
 // If Cache_hpp is defined, the program skip to after the #endif
 #define Cache_hpp // if not defined, define Cache_hpp
-
+#include "Set.hpp"
 
 class Cache{
     private:
         int size;
         int associativity;
         int blockSize;
+        Set** sets;
 
     public:
         Cache(int size, int associativity, int blockSize);
@@ -23,7 +24,7 @@ class Cache{
         void setBlockSize(int blockSize);
 
         // Core operations
-        void read();
+        unsigned char read(unsigned long address);
         void write();
         void display();
    
