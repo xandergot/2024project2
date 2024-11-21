@@ -9,6 +9,8 @@
 #include "Cache.hpp"  // Include the Cache header file
 #include "PerformanceCounter.hpp"  // Include the PerformanceCounter header file
 #include "Memory.hpp"  // Include the Memory header file
+#include "Set.hpp"  // Include the Set header file
+#include <iostream>  // Include the iostream library for cout and cin
 
 void testNwayDetail() {
   // This is a test the test an N-way associative cache

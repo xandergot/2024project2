@@ -1,4 +1,6 @@
 #include "Set.hpp"
+#include "Block.cpp"
+#include <iostream>
 
 //Note: LRU stands for Least Recently Used, which is a cache replacement policy 
 
@@ -54,12 +56,13 @@ void Set::evictBlock() {
 }
 
 // Display the contents of the set
-void Set::display() const {
-    // Print set information
-    // ...
-
-    // Iterate through blocks and print their contents
-    for (const Block& block : blocks) {
-        block.display();
+void Set::display() {
+    std::cout << "Set contents:" << std::endl;
+    for (int i = 0; i < associativity; ++i) {
+        std::cout << "Block " << i << ": "
+                  << "Tag: " << blocks[i].getTag() 
+                  << ", Valid: " << blocks[i].isValid() 
+                  << ", Data: " << blocks[i].readData() 
+                  << std::endl;
     }
 }
