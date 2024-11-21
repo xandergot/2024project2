@@ -16,8 +16,8 @@ private:
     int blockOffsetBits;
 
 public:
-    AddressDecoder(int numSets, int blockSize);
-    AddressComponents decodeAddress(int address) const;
+    AddressDecoder(int numSets, int blockSize); // Constructor
+    AddressComponents decodeAddress(int address) const; // Decode the address
 
 };
 
