@@ -6,8 +6,9 @@
 // Basically, it is as simple a C++ setup as possible
 
 #include <stdio.h>
-#include "Memory.h"
-#include "Cache.h"
+#include "Cache.hpp"  // Include the Cache header file
+#include "PerformanceCounter.hpp"  // Include the PerformanceCounter header file
+#include "Memory.hpp"  // Include the Memory header file
 
 void testNwayDetail() {
   // This is a test the test an N-way associative cache
@@ -150,11 +151,37 @@ void testNwayDetail() {
 }
 
 int main() {
+    // Initialize cache parameters
+    int cacheSize = 1024; // Example cache size
+    int associativity = 4; // Example associativity
+    int blockSize = 64; // Example block size
 
-  // Correctness test
-  testNwayDetail();
+    // Create a Cache object
+    Cache cache(cacheSize, associativity, blockSize);
 
-  // Performance tests go here...
+    // Create a PerformanceCounter object
+    PerformanceCounter performanceCounter;
 
+    // Example addresses for testing
+    unsigned long addresses[] = {0x1A2B3C, 0x1A2B4C, 0x1A2B5C, 0x1A2B6C, 0x1A2B7C};
 
+    // Simulate cache operations
+    for (unsigned long address : addresses) {
+        if (cache.read(address)) {
+            performanceCounter.incrementHits();
+        } else {
+            performanceCounter.incrementMisses();
+            cache.write(address, 0xDEADBEEF); // Example data
+        }
+    }
+
+    // Display performance results
+    std::cout << "Cache Performance Results:" << std::endl;
+    std::cout << "Hits: " << performanceCounter.getHits() << std::endl;
+    std::cout << "Misses: " << performanceCounter.getMisses() << std::endl;
+    std::cout << "Miss Rate: " << performanceCounter.getMissRate() << "%" << std::endl;
+    std::cout << "Writebacks: " << performanceCounter.getWritebacks() << std::endl;
+    std::cout << "Writeback Rate: " << performanceCounter.getWritebackRate() << "%" << std::endl;
+
+    return 0;
 }
