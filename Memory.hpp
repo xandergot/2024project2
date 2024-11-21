@@ -9,11 +9,8 @@ class Memory{
         Memory(int size);
 
         unsigned char getByte(unsigned long address);
-
         void setBytes(unsigned long address);
-
         int getMemorySize();
-
         void displayBits();
 };
 #endif
