@@ -19,7 +19,7 @@ unsigned char Memory::getByte(unsigned long address){
 
 
 int Memory::getMemorySize(){
-    return(this.memorySize);
+    return(this->memorySize);
 }
 
 void Memory::displayBits(){

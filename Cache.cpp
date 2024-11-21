@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Cache.hpp"
 #include "AddressDecoder.hpp"
 
@@ -6,11 +7,13 @@ Cache::Cache(int size, int associativity, int blockSize){
     this->associativity = associativity;
     this->blockSize = blockSize;
     int setNum = size/(associativity * blockSize);
+    decoder = new AddressDecoder(blockSize, numSets);
     sets = new Set*[setNum];
 
     for (int i = 0; i < setNum; i++) {
         sets[i] = new Set(associativity, blockSize);
     }
+
 }
 
 int Cache::getSize(){
@@ -27,10 +30,20 @@ int Cache::getBlockSize(){
 
 unsigned char Cache::read(unsigned long address){
     unsigned long tag, setIndex, blockOffset;
+    decoder->decode(address, tag, setIndex, blockOffset);
+
+    Set* set = sets[setIndex];
+    return set->readBlock(tag, blockOffset);
+}
 
 }
 void Cache::write(){
-    
+     unsigned long tag, setIndex, blockOffset;
+    decoder->decode(address, tag, setIndex, blockOffset);
+
+    // Access the appropriate set and write the value
+    Set* set = sets[setIndex];
+    set->writeBlock(tag, blockOffset, value);
 }
 void Cache::display(){
         for (int i = 0; i < size/(associativity * blockSize); i++) {

@@ -8,6 +8,7 @@ class Cache{
         int size;
         int associativity;
         int blockSize;
+        AddressDecoder decoder;
         Set** sets;
 
     public:
