@@ -1,5 +1,5 @@
-main.o: main.o preformanceCounter.o cache.o block.o addressDecoder.o simulation.o
-	g++ memory.o preformanceCounter.o set.o cache.o block.o addressDecoder.o  simulation.o -o test
+main.o: main.o performanceCounter.o cache.o block.o addressDecoder.o simulation.o
+	g++ memory.o performanceCounter.o set.o cache.o block.o addressDecoder.o  simulation.o -o test
 
 addressDecoder.o: AddressDecoder.hpp
 	g++ -o AddressDecoder.cpp
@@ -13,8 +13,8 @@ cache.o: Cache.hpp
 memory.o: Memory.hpp
 	g++ -c Memory.cpp
 
-preformanceCounter.o: preformanceCounter.hpp
-	g++ -c preformanceCounter
+performanceCounter.o: PerformanceCounter.hpp
+	g++ -c PerformanceCounter.cpp
 
 set.o: Set.hpp
 	g++ -c Set.cpp
