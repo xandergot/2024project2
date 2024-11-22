@@ -2,6 +2,7 @@
 #define Cache_hpp // if not defined, define Cache_hpp
 #include "Set.hpp"
 #include "AddressDecoder.hpp"
+#include "Memory.hpp"
 
 class Cache{
     private:
