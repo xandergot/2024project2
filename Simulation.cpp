@@ -153,6 +153,7 @@ void testNwayDetail() {
 }
 
 int main() {
+    testNwayDetail();
     // // Initialize cache parameters
     // int cacheSize = 1024; // Example cache size
     // int associativity = 4; // Example associativity
