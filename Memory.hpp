@@ -3,12 +3,12 @@
 class Memory{
     private:
         int memorySize;
-        unsigned char* MainMemory; 
+        unsigned int* MainMemory; 
 
     public:
         Memory(int size);
 
-        unsigned char getByte(unsigned long address);
+        unsigned int getByte(unsigned long address);
         void setBytes(unsigned long address);
         int getMemorySize();
         void display();

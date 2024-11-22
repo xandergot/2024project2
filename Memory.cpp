@@ -3,7 +3,7 @@
 
 Memory::Memory(int size) {
     this->memorySize = size;
-    MainMemory = new unsigned char[size]; // Correctly allocate memory
+    MainMemory = new unsigned int[size]; // Correctly allocate memory
     for (int i = 0; i < size; i++) { // Use semicolon instead of comma
         MainMemory[i] = i % 255;
     }
@@ -17,7 +17,7 @@ void Memory::setBytes(unsigned long address) {
     this->MainMemory[address] = 1;
 }
 
-unsigned char Memory::getByte(unsigned long address) {
+unsigned int Memory::getByte(unsigned long address) {
     return this->MainMemory[address]; // Correct array access
 }
 
