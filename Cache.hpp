@@ -27,7 +27,7 @@ class Cache{
 
         // Core operations
         unsigned char read(unsigned long address);
-        void write();
+        void write(unsigned long address, unsigned char value);
         void display();
    
 };
