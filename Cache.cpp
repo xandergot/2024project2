@@ -7,8 +7,8 @@ Cache::Cache(int size, int associativity, int blockSize){
     this->associativity = associativity;
     this->blockSize = blockSize;
     int setNum = size/(associativity * blockSize);
-    decoder = new AddressDecoder(blockSize, numSets);
-    sets = new Set*[setNum];
+    decoder = AddressDecoder(blockSize, setNum);
+    sets = Set*[setNum];
 
     for (int i = 0; i < setNum; i++) {
         sets[i] = new Set(associativity, blockSize);
