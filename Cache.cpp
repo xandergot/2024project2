@@ -3,7 +3,7 @@
 #include "AddressDecoder.hpp"
 
 Cache::Cache(unsigned int mDisplay, int size, int associativity, int blockSize)
-    : size(size), associativity(associativity), blockSize(blockSize), curBlock(mDisplay),
+    : size(size), associativity(associativity), blockSize(blockSize), mDisplay(mDisplay),
       decoder(size / (associativity * blockSize), blockSize) { // Initialize decoder using initializer list
     int setNum = size / (associativity * blockSize);
     sets = new Set*[setNum]; // Allocate memory for sets
@@ -31,7 +31,7 @@ unsigned char Cache::read(unsigned long address) {
     unsigned long setIndex = components.setIndex;
     unsigned long blockOffset = components.blockOffset;
     // Implement the read functionality here, using mDisplay if necessary
-    if (curBlock) {
+    if (mDisplay) {
         std::cout << "Reading address: " << address << std::endl;
     }
     return 0; // Placeholder return value
