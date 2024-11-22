@@ -8,7 +8,7 @@ Cache::Cache(int size, int associativity, int blockSize){
     this->blockSize = blockSize;
     int setNum = size/(associativity * blockSize);
     decoder = AddressDecoder(blockSize, setNum);
-    sets = Set*[setNum];
+    sets = Set* [setNum];
 
     for (int i = 0; i < setNum; i++) {
         sets[i] = new Set(associativity, blockSize);
@@ -33,7 +33,7 @@ unsigned char Cache::read(unsigned long address){
     decoder.decodeAddress(address, tag, setIndex, blockOffset);
 
     Set* set = sets[setIndex];
-    return set->loadBlock(tag, blockOffset);
+    return set->loadBlock(block);
 }
 
 void Cache::write(){
