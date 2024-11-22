@@ -2,7 +2,7 @@
 #include "Cache.hpp"
 #include "AddressDecoder.hpp"
 
-Cache::Cache(unsigned int mDisplay, int size, int associativity, int blockSize)
+Cache::Cache(Memory* mDisplay, int size, int associativity, int blockSize)
     : size(size), associativity(associativity), blockSize(blockSize), mDisplay(mDisplay),
       decoder(size / (associativity * blockSize), blockSize) { // Initialize decoder using initializer list
     int setNum = size / (associativity * blockSize);
