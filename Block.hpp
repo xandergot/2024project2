@@ -17,14 +17,17 @@ public:
     void writeToMemory(unsigned long address);
     void display();
 
-private:
-    Memory* mainMemory;
-    int blockSize;
-    unsigned char* data;
     unsigned long valid;
     unsigned long dirty;
     unsigned long tag;
     long stamp;
+
+private:
+    Memory* mainMemory;
+    int blockSize;
+    unsigned char* data;
+    
+    
 };
 
 Block::Block(Memory* memory, int block_size) {

@@ -1,29 +1,26 @@
-#ifndef PerformanceCounter_hpp
-#define PerformanceCounter_hpp
-
+#ifndef PERFORMANCECOUNTER_H
+#define PERFORMANCECOUNTER_H
+// DONE: Add this after the Cache/Set/Block system is working 
+// Keeps track of how many hits, misses, and writebacks happen in a simulation 
 class PerformanceCounter {
-private:
-    int hits;
-    int misses;
-    int writeBacks;
+    public:
+        // Variables
+        int hits;
+        int accesses;
+        int misses;
+        int writebacks;
+        int miss_percentage;
+        int writeback_percentage;
 
-public: 
-    // Constructor
-    PerformanceCounter();
+        // Constructor
+        PerformanceCounter();
 
-    // Increment functions
-    void incrementHits();
-    void incrementMisses();
-    void incrementWritebacks();
-
-    // Getter functions
-    int getHits() const;
-    int getMisses() const;
-    int getWritebacks() const;
-
-    // Rate functions
-    double getMissRate() const;
-    double getWritebackRate() const;
+        // Functions
+        void incrementHitCount();
+        void incrementAccessCount();
+        void incrementMissCount();
+        void incrementWriteBackCount();
+        void calculateMissPercentage();
+        void calculateWritebackPercentage();
 };
-
 #endif

@@ -18,8 +18,7 @@ Block::Block(Memory* memory, int block_size) {
 }
 
 unsigned char Block::blockRead(unsigned long blockOffset) {
-    // Read the byte from the block with the block offset as the address 
-    // Update the timestamp on each access 
+    // Read byte from the block with the block offset as the address
     std::chrono::high_resolution_clock stamp;
     long nanoSec = std::chrono::duration_cast<std::chrono::nanoseconds>(stamp.now().time_since_epoch()).count();
     this->stamp = nanoSec;
@@ -28,7 +27,6 @@ unsigned char Block::blockRead(unsigned long blockOffset) {
 
 void Block::blockWrite(unsigned long blockOffset, unsigned char new_value) {
     // Write the byte with the block offset as the address
-    // update the timestamp 
     std::chrono::high_resolution_clock stamp;
     long nanoSec = std::chrono::duration_cast<std::chrono::nanoseconds>(stamp.now().time_since_epoch()).count();
     this->stamp = nanoSec;
@@ -36,15 +34,13 @@ void Block::blockWrite(unsigned long blockOffset, unsigned char new_value) {
 }
 
 void Block::loadFromMemory(unsigned long address) {
- // These should simply loop and load the correct number of bytes to fill the Block from/to memory
- // This means that we should go to an address in memory and load BLOCK_SIZE bytes into the block FROM memory
+ // Loops and loads bytes to fill the Block from/to memory
  printf("Loading block from memory\n");
  printf("Address: %lu\n", address);
     for (int i = 0; i < blockSize; i++) {
         data[i] = mainMemory->getByte(address + i);
         // Update the valid bit
         valid = 1;
-        // 
     }
 }
 
@@ -62,7 +58,7 @@ void Block::display() {
     printf("    Dirty: %lu\n", dirty);
     printf("    Timestamp: %ld\n", stamp);
 
-    // Print the bytes of the block from the cache
+    // Print the data in the block
     for (int i = 0; i < blockSize; i++) {
         printf("    %02X ", data[i]);
     }

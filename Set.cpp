@@ -1,71 +1,90 @@
+#include <stdio.h>
+
 #include "Set.hpp"
 #include "Block.hpp"
-#include <iostream>
+#include "PerformanceCounter.hpp"
+#include "AddressDecoder.hpp"
 
-//Note: LRU stands for Least Recently Used, which is a cache replacement policy 
-
-// Constructor
-// Constructor
-Set::Set(int associativity, int blockSize) : associativity(associativity) {
-    // Initialize the blocks in the set
-    blocks.resize(associativity); // Resize the vector to hold 'associativity' blocks
-
-    for (int i = 0; i < associativity; ++i) {
-        blocks[i] = Block(blockSize); // Assign a new Block object to each element
+Set::Set(int num_blocks, int block_size, Memory* mainMemory, AddressDecoder* addressDecoder, PerformanceCounter* performanceCounter) {
+    this->block_size = block_size;
+    this->num_blocks = num_blocks;
+    blocks = new Block*[num_blocks];
+    this->addressDecoder = addressDecoder;
+    for (int i = 0; i < num_blocks; i++) {
+        blocks[i] = new Block(mainMemory, block_size);
+        blocks[i]->valid = 0;
+        blocks[i]->dirty = 0;
     }
+    this->performanceCounter = performanceCounter;
 }
 
-// Find a block in the set based on the address
-Block* Set::findBlock(unsigned long address) {
-    for (Block& block : blocks) {
-        if (block.getTag() == (address >> (block.getBlockOffsetBits() + setIndexBits))) {
-            return &block;
+unsigned char Set::setRead(unsigned long address) {
+    performanceCounter->incrementAccessCount();
+    unsigned long blockNum = num_blocks;
+    for (unsigned long i = 0; i < blockNum; i++) {
+        if (blocks[i]->valid == 1 && blocks[i]->tag == addressDecoder->getTag(address)) {
+            printf("CACHE HIT DETECTED\n");
+            performanceCounter->incrementHitCount();
+            blocks[i]->tag = addressDecoder->getTag(address);
+            return blocks[i]->blockRead(addressDecoder->decodeBlockOffset(address));
         }
     }
-    return nullptr; // Block not found
-}
-
-// Load a block into the set
-void Set::loadBlock(const Block& newBlock) {
-    // Check if there is an empty block in the set
-    for (Block& block : blocks) {
-        if (!block->isValid()) {
-            block = newBlock;
-            block.setValid(true);
-            return;
+    printf("CACHE MISS DETECTED\n");
+    performanceCounter->incrementMissCount();
+    for (int i = 0; i < num_blocks; i++) {
+        if (blocks[i]->valid == 0) {
+            blocks[i]->loadFromMemory(address);
+            blocks[i]->tag = addressDecoder->getTag(address);
+            return blocks[i]->blockRead(addressDecoder->decodeBlockOffset(address)); 
         }
     }
-
-    // If no empty block is found, evict a block using LRU policy
-    evictBlock();
-
-    // Load the new block into the evicted block's position
-    for (Block& block : blocks) {
-        if (!block.isValid()) {
-            block = newBlock;
-            block->setValid(true);
-            return;
+    Block* lru_block = blocks[0];
+    for (int i = 0; i < num_blocks; i++) {
+        if (blocks[i]->stamp < lru_block->stamp) {
+            lru_block = blocks[i];
         }
     }
+    if (lru_block->dirty == 1) {
+        lru_block->writeToMemory(address);
+        performanceCounter->incrementWriteBackCount();
+    }
+    lru_block->loadFromMemory(address);
+    return lru_block->blockRead(addressDecoder->getBlockOffset(address));
 }
 
-// Evict a block from the set (LRU)
-void Set::evictBlock() {
-    int lruIndex = lruList.front(); // Get the least recently used block index
-    lruList.pop_front(); // Remove it from the LRU list
-    blocks[lruIndex].setValid(false); // Invalidate the block
-    lruList.push_back(lruIndex); // Move it to the back of the list
-    lruIterators[lruIndex] = --lruList.end(); // Update the iterator
+void Set::setWrite(unsigned long address, unsigned char new_value) {
+    performanceCounter->incrementAccessCount();
+    for (int i = 0; i < num_blocks; i++) {
+        if (blocks[i]->tag == addressDecoder->getTag(address)) {
+            blocks[i]->tag = addressDecoder->getTag(address);
+            blocks[i]->dirty = 1;
+            return blocks[i]->blockWrite(addressDecoder->decodeBlockOffset(address), new_value);
+        }
+    }
+    for (int i = 0; i < num_blocks; i++) {
+        if (blocks[i]->valid == 0) {
+            blocks[i]->loadFromMemory(address);
+            blocks[i]->tag = addressDecoder->getTag(address);
+            return blocks[i]->blockWrite(addressDecoder->getBlockOffset(address), new_value);
+        }
+    }
+    Block* lru_block = blocks[0];
+    for (int i = 0; i < num_blocks; i++) {
+        if (blocks[i]->stamp < lru_block->stamp) {
+            lru_block = blocks[i];
+        }
+    }
+    if (lru_block->dirty == 1) {
+        lru_block->writeToMemory(address);
+        performanceCounter->incrementWriteBackCount();
+    }
+    lru_block->loadFromMemory(address);
 }
 
-// Display the contents of the set
-void Set::display() {
-    std::cout << "Set contents:" << std::endl;
-    for (int i = 0; i < associativity; ++i) {
-        std::cout << "Block " << i << ": "
-                  << "Tag: " << blocks[i].getTag() 
-                  << ", Valid: " << blocks[i].isValid() 
-                  << ", Data: " << blocks[i].readData() 
-                  << std::endl;
+void Set::setDump() {
+    printf("  Blocks\n");
+    for (int i = 0; i < num_blocks; i++) {
+        printf("   %d\n", i);
+        blocks[i]->display();
     }
 }

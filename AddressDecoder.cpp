@@ -29,3 +29,7 @@ AddressComponents AddressDecoder::decodeAddress(int address) const {
 
     return components;
 }
+
+int AddressDecoder::getTag(int address) const {
+    return address >> (blockOffsetBits + setIndexBits);
+}
