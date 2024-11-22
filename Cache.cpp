@@ -33,7 +33,7 @@ unsigned char Cache::read(unsigned long address){
     decoder.decodeAddress(address, tag, setIndex, blockOffset);
 
     Set* set = sets[setIndex];
-    return set->loadBlock(block);
+    return set->loadBlock(Block);
 }
 
 void Cache::write(unsigned long address, unsigned char value){
