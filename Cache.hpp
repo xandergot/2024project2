@@ -1,5 +1,4 @@
 #ifndef Cache_hpp // checks if Cache_hpp is defined.
-// If Cache_hpp is defined, the program skip to after the #endif
 #define Cache_hpp // if not defined, define Cache_hpp
 #include "Set.hpp"
 #include "AddressDecoder.hpp"
@@ -15,7 +14,7 @@ class Cache{
 
     public:
 
-        Cache(unsigned int mDisplay, int size, int associativity, int blockSize){};
+        Cache(Memory* mDisplay, int size, int associativity, int blockSize);
 
         // Getters
         int getSize();
