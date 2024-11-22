@@ -153,37 +153,37 @@ void testNwayDetail() {
 }
 
 int main() {
-    // Initialize cache parameters
-    int cacheSize = 1024; // Example cache size
-    int associativity = 4; // Example associativity
-    int blockSize = 64; // Example block size
+    // // Initialize cache parameters
+    // int cacheSize = 1024; // Example cache size
+    // int associativity = 4; // Example associativity
+    // int blockSize = 64; // Example block size
 
-    // Create a Cache object
-    Cache cache(cacheSize, associativity, blockSize);
+    // // Create a Cache object
+    // Cache cache(cacheSize, associativity, blockSize);
 
-    // Create a PerformanceCounter object
-    PerformanceCounter performanceCounter;
+    // // Create a PerformanceCounter object
+    // PerformanceCounter performanceCounter;
 
-    // Example addresses for testing
-    unsigned long addresses[] = {0x1A2B3C, 0x1A2B4C, 0x1A2B5C, 0x1A2B6C, 0x1A2B7C};
+    // // Example addresses for testing
+    // unsigned long addresses[] = {0x1A2B3C, 0x1A2B4C, 0x1A2B5C, 0x1A2B6C, 0x1A2B7C};
 
-    // Simulate cache operations
-    for (unsigned long address : addresses) {
-        if (cache.read(address)) {
-            performanceCounter.incrementHits();
-        } else {
-            performanceCounter.incrementMisses();
-            cache.write(address, 0xDEADBEEF); // Example data
-        }
-    }
+    // // Simulate cache operations
+    // for (unsigned long address : addresses) {
+    //     if (cache.read(address)) {
+    //         performanceCounter.incrementHits();
+    //     } else {
+    //         performanceCounter.incrementMisses();
+    //         cache.write(address, 0xDEADBEEF); // Example data
+    //     }
+    // }
 
-    // Display performance results
-    std::cout << "Cache Performance Results:" << std::endl;
-    std::cout << "Hits: " << performanceCounter.getHits() << std::endl;
-    std::cout << "Misses: " << performanceCounter.getMisses() << std::endl;
-    std::cout << "Miss Rate: " << performanceCounter.getMissRate() << "%" << std::endl;
-    std::cout << "Writebacks: " << performanceCounter.getWritebacks() << std::endl;
-    std::cout << "Writeback Rate: " << performanceCounter.getWritebackRate() << "%" << std::endl;
+    // // Display performance results
+    // std::cout << "Cache Performance Results:" << std::endl;
+    // std::cout << "Hits: " << performanceCounter.getHits() << std::endl;
+    // std::cout << "Misses: " << performanceCounter.getMisses() << std::endl;
+    // std::cout << "Miss Rate: " << performanceCounter.getMissRate() << "%" << std::endl;
+    // std::cout << "Writebacks: " << performanceCounter.getWritebacks() << std::endl;
+    // std::cout << "Writeback Rate: " << performanceCounter.getWritebackRate() << "%" << std::endl;
 
-    return 0;
+    // return 0;
 }
