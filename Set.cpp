@@ -1,14 +1,17 @@
 #include "Set.hpp"
-#include "Block.cpp"
+#include "Block.hpp"
 #include <iostream>
 
 //Note: LRU stands for Least Recently Used, which is a cache replacement policy 
 
 // Constructor
+// Constructor
 Set::Set(int associativity, int blockSize) : associativity(associativity) {
     // Initialize the blocks in the set
+    blocks.resize(associativity); // Resize the vector to hold 'associativity' blocks
+
     for (int i = 0; i < associativity; ++i) {
-        blocks.push_back(Block(blockSize));
+        blocks[i] = Block(blockSize); // Assign a new Block object to each element
     }
 }
 

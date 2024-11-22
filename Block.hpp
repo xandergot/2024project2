@@ -6,6 +6,8 @@ private:
     unsigned long tag;
     bool valid;
     int data;  // is this an int?
+    bool dirtyBit;
+    int timestamp;
 
 public:
     Block();
@@ -18,6 +20,8 @@ public:
 
     int readData();
     void writeData(int d);
+
+    void setDirty(bool d);
 };
 
 
