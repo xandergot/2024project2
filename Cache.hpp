@@ -15,7 +15,7 @@ class Cache{
 
     public:
 
-        Cache(unsigned int mDisplay, int size, int associativity, int blockSize);
+        Cache(unsigned char mDisplay, int size, int associativity, int blockSize);
 
         // Getters
         int getSize();
