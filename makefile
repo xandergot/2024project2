@@ -2,7 +2,7 @@ main.o: main.o performanceCounter.o cache.o block.o addressDecoder.o simulation.
 	g++ memory.o performanceCounter.o set.o cache.o block.o addressDecoder.o  simulation.o -o test
 
 addressDecoder.o: AddressDecoder.hpp
-	g++ -o AddressDecoder.cpp
+	g++ -c AddressDecoder.cpp
 
 block.o: Block.hpp
 	g++ -c Block.cpp
@@ -19,7 +19,7 @@ performanceCounter.o: PerformanceCounter.hpp
 set.o: Set.hpp
 	g++ -c Set.cpp
 
-simulation.o: Simulation.hpp
+simulation.o:
 	g++ -c Simulation.cpp
 
 

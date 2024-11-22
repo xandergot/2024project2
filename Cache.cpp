@@ -2,51 +2,35 @@
 #include "Cache.hpp"
 #include "AddressDecoder.hpp"
 
-Cache::Cache(int size, int associativity, int blockSize){
-    this->size = size;
-    this->associativity = associativity;
-    this->blockSize = blockSize;
-    int setNum = size/(associativity * blockSize);
-    decoder = AddressDecoder(blockSize, setNum);
-    sets = Set[setNum];
+Cache::Cache(int size, int associativity, int blockSize)
+    : size(size), associativity(associativity), blockSize(blockSize),
+      decoder(size / (associativity * blockSize), blockSize) { // Initialize decoder using initializer list
+    int setNum = size / (associativity * blockSize);
+    sets = new Set*[setNum]; // Allocate memory for sets
 
     for (int i = 0; i < setNum; i++) {
         sets[i] = new Set(associativity, blockSize);
     }
-
 }
 
-int Cache::getSize(){
-    return(this->size);
+int Cache::getSize() {
+    return this->size;
 }
 
-int Cache::getAssociativity(){
-    return(this->associativity);
+int Cache::getAssociativity() {
+    return this->associativity;
 }
 
-int Cache::getBlockSize(){
-    return(this->blockSize);
+int Cache::getBlockSize() {
+    return this->blockSize;
 }
 
-unsigned char Cache::read(unsigned long address){
+unsigned char Cache::read(unsigned long address) {
     unsigned long tag, setIndex, blockOffset;
-    decoder.decodeAddress(address, tag, setIndex, blockOffset);
-
-    Set* set = sets[setIndex];
-    return set->loadBlock(Block);
-}
-
-void Cache::write(unsigned long address, unsigned char value){
-     unsigned long tag, setIndex, blockOffset;
-    decoder.decodeAddress(address, tag, setIndex, blockOffset);
-
-    // Access the appropriate set and write the value
-    Set* set = sets[setIndex];
-    set->writeBlock(tag, blockOffset, value);
-}
-void Cache::display(){
-        for (int i = 0; i < size/(associativity * blockSize); i++) {
-        std::cout << "Set " << i << ": ";
-        sets[i]->display();
-    }
+    AddressComponents components = decoder.decodeAddress(address);
+    tag = components.tag;
+    setIndex = components.setIndex;
+    blockOffset = components.blockOffset;
+    // Implement the read functionality here
+    return 0; // Placeholder return value
 }
