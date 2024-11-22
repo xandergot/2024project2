@@ -19,7 +19,7 @@ performanceCounter.o: PerformanceCounter.hpp
 set.o: Set.hpp
 	g++ -c Set.cpp
 
-simulation.o: Simulation.hpp
+simulation.o:
 	g++ -c Simulation.cpp
 
 

@@ -1,5 +1,5 @@
 #include "AddressDecoder.hpp"
-#include <math.h> // Include the math library for log2
+#include <cmath>
 
 AddressDecoder::AddressDecoder(int numSets, int blockSize) {
     this->numSets = numSets;
