@@ -30,16 +30,15 @@ int Cache::getBlockSize(){
 
 unsigned char Cache::read(unsigned long address){
     unsigned long tag, setIndex, blockOffset;
-    decoder->decode(address, tag, setIndex, blockOffset);
+    decoder.decodeAddress(address, tag, setIndex, blockOffset);
 
     Set* set = sets[setIndex];
-    return set->readBlock(tag, blockOffset);
+    return set->loadBlock(tag, blockOffset);
 }
 
-}
 void Cache::write(){
      unsigned long tag, setIndex, blockOffset;
-    decoder->decode(address, tag, setIndex, blockOffset);
+    decoder.decode(address, tag, setIndex, blockOffset);
 
     // Access the appropriate set and write the value
     Set* set = sets[setIndex];
