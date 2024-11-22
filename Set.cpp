@@ -26,7 +26,7 @@ Block* Set::findBlock(unsigned long address) {
 void Set::loadBlock(const Block& newBlock) {
     // Check if there is an empty block in the set
     for (Block& block : blocks) {
-        if (!block.isValid()) {
+        if (!block->isValid()) {
             block = newBlock;
             block.setValid(true);
             return;
@@ -40,7 +40,7 @@ void Set::loadBlock(const Block& newBlock) {
     for (Block& block : blocks) {
         if (!block.isValid()) {
             block = newBlock;
-            block.setValid(true);
+            block->setValid(true);
             return;
         }
     }
