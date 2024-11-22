@@ -7,7 +7,7 @@ Cache::Cache(Memory* mDisplay, int size, int associativity, int blockSize){
     this->associativity = associativity;
     this->blockSize = blockSize;
     this->mDisplay = mDisplay;
-    this->decoder = AddressDecoder(size / (associativity * blockSize), blockSize); // Initialize decoder using initializer list
+    this->decoder = new AddressDecoder(size / (associativity * blockSize), blockSize); // Initialize decoder using initializer list
     int setNum = size / (associativity * blockSize);
     sets = new Set*[setNum]; // Allocate memory for sets
 
