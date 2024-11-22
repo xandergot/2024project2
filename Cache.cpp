@@ -8,7 +8,7 @@ Cache::Cache(int size, int associativity, int blockSize){
     this->blockSize = blockSize;
     int setNum = size/(associativity * blockSize);
     decoder = AddressDecoder(blockSize, setNum);
-    sets = Set* [setNum];
+    sets = Set[setNum];
 
     for (int i = 0; i < setNum; i++) {
         sets[i] = new Set(associativity, blockSize);
@@ -36,9 +36,9 @@ unsigned char Cache::read(unsigned long address){
     return set->loadBlock(block);
 }
 
-void Cache::write(){
+void Cache::write(unsigned long address, unsigned char value){
      unsigned long tag, setIndex, blockOffset;
-    decoder.decode(address, tag, setIndex, blockOffset);
+    decoder.decodeAddress(address, tag, setIndex, blockOffset);
 
     // Access the appropriate set and write the value
     Set* set = sets[setIndex];

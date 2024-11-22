@@ -25,7 +25,7 @@ int Memory::getMemorySize() {
     return this->memorySize; // Use arrow operator for member access
 }
 
-void Memory::displayBits() {
+void Memory::display() {
     for (int i = 0; i < memorySize; i++) {
         std::bitset<8> bits(MainMemory[i]);
         std::cout << "Address " << i << ": " << bits << std::endl;

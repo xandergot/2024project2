@@ -11,6 +11,6 @@ class Memory{
         unsigned char getByte(unsigned long address);
         void setBytes(unsigned long address);
         int getMemorySize();
-        void displayBits();
+        void display();
 };
 #endif
