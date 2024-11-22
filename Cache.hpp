@@ -13,8 +13,9 @@ class Cache{
         Set** sets;
 
     public:
-        Cache(int size, int associativity, int blockSize);
-        
+
+        Cache(unsigned int mDisplay, int size, int associativity, int blockSize);
+
         // Getters
         int getSize();
         int getAssociativity();
