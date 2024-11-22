@@ -2,7 +2,7 @@
 #include "Cache.hpp"
 #include "AddressDecoder.hpp"
 
-Cache::Cache(unsigned char mDisplay, int size, int associativity, int blockSize)
+Cache::Cache(unsigned int mDisplay, int size, int associativity, int blockSize)
     : size(size), associativity(associativity), blockSize(blockSize), mDisplay(mDisplay),
       decoder(size / (associativity * blockSize), blockSize) { // Initialize decoder using initializer list
     int setNum = size / (associativity * blockSize);
@@ -25,7 +25,7 @@ int Cache::getBlockSize() {
     return this->blockSize;
 }
 
-unsigned char Cache::read(unsigned long address) {
+unsigned int Cache::read(unsigned long address) {
     AddressComponents components = decoder.decodeAddress(address);
     unsigned long tag = components.tag;
     unsigned long setIndex = components.setIndex;

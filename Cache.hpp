@@ -15,7 +15,7 @@ class Cache{
 
     public:
 
-        Cache(unsigned char mDisplay, int size, int associativity, int blockSize);
+        Cache(unsigned int mDisplay, int size, int associativity, int blockSize);
 
         // Getters
         int getSize();
@@ -28,8 +28,8 @@ class Cache{
         void setBlockSize(int blockSize);
 
         // Core operations
-        unsigned char read(unsigned long address);
-        void write(unsigned long address, unsigned char value);
+        unsigned int read(unsigned long address);
+        void write(unsigned long address, unsigned int value);
         void display();
    
 };
