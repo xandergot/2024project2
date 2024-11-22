@@ -1,4 +1,4 @@
-main.o: main.o performanceCounter.o cache.o block.o addressDecoder.o simulation.o
+main.o: performanceCounter.o cache.o block.o addressDecoder.o simulation.o
 	g++ memory.o performanceCounter.o set.o cache.o block.o addressDecoder.o  simulation.o -o test
 
 addressDecoder.o: AddressDecoder.hpp
