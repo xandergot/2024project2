@@ -10,7 +10,7 @@ class Cache{
         int associativity;
         int blockSize;
         AddressDecoder decoder;
-        mDisplay curBlock;
+        bool mDisplay;
         Set** sets;
 
     public:
