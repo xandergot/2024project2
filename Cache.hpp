@@ -2,6 +2,7 @@
 // If Cache_hpp is defined, the program skip to after the #endif
 #define Cache_hpp // if not defined, define Cache_hpp
 #include "Set.hpp"
+#include "AddressDecoder.hpp"
 
 class Cache{
     private:

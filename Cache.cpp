@@ -49,4 +49,5 @@ void Cache::display(){
         for (int i = 0; i < size/(associativity * blockSize); i++) {
         std::cout << "Set " << i << ": ";
         sets[i]->display();
+    }
 }
