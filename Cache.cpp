@@ -3,7 +3,7 @@
 #include "AddressDecoder.hpp"
 
 Cache::Cache(Memory* mDisplay, int size, int associativity, int blockSize)
-    :decoder(size / (associativity * blockSize), blockSize); // Initialize decoder using initializer list{
+    :decoder(size / (associativity * blockSize), blockSize) // Initialize decoder using initializer list{
     this->size =size;
     this->associativity = associativity;
     this->blockSize = blockSize;
