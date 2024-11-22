@@ -2,9 +2,12 @@
 #include "Cache.hpp"
 #include "AddressDecoder.hpp"
 
-Cache::Cache(Memory* mDisplay, int size, int associativity, int blockSize)
-    : size(size), associativity(associativity), blockSize(blockSize), mDisplay(mDisplay),
-      decoder(size / (associativity * blockSize), blockSize) { // Initialize decoder using initializer list
+Cache::Cache(Memory* mDisplay, int size, int associativity, int blockSize){
+    this.size =size;
+    this.associativity = associativity;
+    this.blockSize = blockSize;
+    this.mDisplay = mDisplay;
+    this.decoder(size / (associativity * blockSize), blockSize); // Initialize decoder using initializer list
     int setNum = size / (associativity * blockSize);
     sets = new Set*[setNum]; // Allocate memory for sets
 
